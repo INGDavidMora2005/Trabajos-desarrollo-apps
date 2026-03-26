@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      'https://cdn.conmebol.com/wp-content/uploads/2015/11/messi-clasico-4.jpg',
+                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
                       width: 150,
                       height: 150,
                       fit: BoxFit.cover,
