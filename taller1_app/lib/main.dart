@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
               // Nombre del estudiante
               const SizedBox(height: 16),
               const Text(
-                'Tu Nombre Completo',
+                'David Mora Duque',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
 
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Dog_Breeds.jpg/320px-Dog_Breeds.jpg',
+                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
                       width: 150,
                       height: 150,
                       fit: BoxFit.cover,
