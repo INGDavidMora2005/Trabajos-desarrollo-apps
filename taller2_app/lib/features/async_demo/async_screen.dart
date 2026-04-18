@@ -43,8 +43,11 @@ class _AsyncScreenState extends State<AsyncScreen> {
             ),
             const SizedBox(height: 24),
             // Sección de botones
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Wrap(
+              direction: Axis.horizontal,
+              alignment: WrapAlignment.spaceEvenly,
+              spacing: 8.0,
+              runSpacing: 8.0,
               children: [
                 ElevatedButton(
                   onPressed: _fetchData,
