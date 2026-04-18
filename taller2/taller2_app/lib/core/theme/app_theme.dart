@@ -18,12 +18,6 @@ class AppTheme {
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
-      cardTheme: CardTheme(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-      ),
     );
   }
 
@@ -42,12 +36,6 @@ class AppTheme {
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
-      ),
-      cardTheme: CardTheme(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
       ),
     );
   }

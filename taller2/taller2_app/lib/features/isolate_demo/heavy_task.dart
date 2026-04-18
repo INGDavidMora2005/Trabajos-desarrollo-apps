@@ -1,5 +1,4 @@
 import 'dart:isolate';
-import 'dart:math';
 
 // Mensaje que se envía al Isolate
 class IsolateMessage {
