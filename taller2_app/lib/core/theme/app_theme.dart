@@ -15,7 +15,7 @@ class AppTheme {
         bodySmall: TextStyle(fontFamily: 'monospace'),
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.indigo,
+        backgroundColor: Color(0xFF33993d),
         foregroundColor: Colors.white,
       ),
     );
@@ -34,7 +34,7 @@ class AppTheme {
         bodySmall: TextStyle(fontFamily: 'monospace'),
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.indigo,
+        backgroundColor: Color(0xFF33993d),
         foregroundColor: Colors.white,
       ),
     );
