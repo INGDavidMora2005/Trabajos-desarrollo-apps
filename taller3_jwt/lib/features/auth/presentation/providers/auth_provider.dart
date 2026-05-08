@@ -35,6 +35,24 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Registra un nuevo usuario
+  Future<void> register(String name, String email, String password) async {
+    status = AuthStatus.loading;
+    errorMessage = null;
+    notifyListeners();
+
+    try {
+      await _authService.register(name: name, email: email, password: password);
+      status = AuthStatus.initial; // Volver al estado inicial después del registro exitoso
+      // No autenticar automáticamente, el usuario debe hacer login
+    } catch (e) {
+      status = AuthStatus.error;
+      errorMessage = e.toString().replaceFirst('Exception: ', '');
+    }
+
+    notifyListeners();
+  }
+
   /// Cierra la sesión del usuario
   Future<void> logout() async {
     try {
