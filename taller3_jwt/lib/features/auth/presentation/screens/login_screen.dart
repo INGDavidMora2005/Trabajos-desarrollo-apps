@@ -73,22 +73,38 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           Consumer<AuthProvider>(
             builder: (context, authProvider, child) => ElevatedButton(
-              onPressed: () async {
-                if (registerFormKey.currentState?.validate() ?? false) {
-                  try {
-                    // Aquí podríamos agregar registro, pero por ahora solo cerrar
-                    Navigator.of(context).pop();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Registro no implementado aún')),
-                    );
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Error: $e')),
-                    );
-                  }
-                }
-              },
-              child: const Text('Registrar'),
+              onPressed: authProvider.status == AuthStatus.loading
+                  ? null
+                  : () async {
+                      if (registerFormKey.currentState?.validate() ?? false) {
+                        try {
+                          await authProvider.register(
+                            nameController.text.trim(),
+                            emailController.text.trim(),
+                            passwordController.text,
+                          );
+                          if (context.mounted) {
+                            Navigator.of(context).pop();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Usuario registrado exitosamente. Ahora puedes iniciar sesión.'),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
+                          }
+                        } catch (e) {
+                          // El error ya se maneja en el provider y se muestra en el login screen
+                          // No necesitamos mostrar otro SnackBar aquí
+                        }
+                      }
+                    },
+              child: authProvider.status == AuthStatus.loading
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Text('Registrar'),
             ),
           ),
         ],
