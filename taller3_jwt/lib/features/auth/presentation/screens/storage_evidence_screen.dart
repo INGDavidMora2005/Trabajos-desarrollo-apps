@@ -36,6 +36,26 @@ class _StorageEvidenceScreenState extends State<StorageEvidenceScreen> {
     });
   }
 
+  String _formatDate(String dateString) {
+    try {
+      final dateTime = DateTime.parse(dateString).toLocal();
+      final now = DateTime.now();
+      final difference = now.difference(dateTime);
+
+      if (difference.inDays == 0) {
+        return '${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
+      } else if (difference.inDays == 1) {
+        return 'Ayer ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
+      } else if (difference.inDays < 7) {
+        return '${difference.inDays} días atrás';
+      } else {
+        return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+      }
+    } catch (e) {
+      return 'Fecha inválida';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,15 +76,17 @@ class _StorageEvidenceScreenState extends State<StorageEvidenceScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
+                    Row(
                       children: [
-                        Icon(Icons.person, color: Colors.blue),
-                        SizedBox(width: 8.0),
-                        Text(
-                          'Datos del Usuario (SharedPreferences)',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                        const Icon(Icons.person, color: Colors.blue),
+                        const SizedBox(width: 8.0),
+                        Expanded(
+                          child: Text(
+                            'Datos del Usuario (SharedPreferences)',
+                            style: const TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
@@ -102,7 +124,7 @@ class _StorageEvidenceScreenState extends State<StorageEvidenceScreen> {
                         const SizedBox(width: 8.0),
                         Expanded(
                           child: Text(
-                            'Fecha de login: ${_userInfo['loginDate'] != null ? DateTime.parse(_userInfo['loginDate']!).toLocal().toString() : 'No disponible'}',
+                            'Fecha de login: ${_userInfo['loginDate'] != null ? _formatDate(_userInfo['loginDate']!) : 'No disponible'}',
                             style: const TextStyle(fontSize: 16.0),
                           ),
                         ),
@@ -121,15 +143,17 @@ class _StorageEvidenceScreenState extends State<StorageEvidenceScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
+                    Row(
                       children: [
-                        Icon(Icons.security, color: Colors.green),
-                        SizedBox(width: 8.0),
-                        Text(
-                          'Seguridad (SecureStorage)',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                        const Icon(Icons.security, color: Colors.green),
+                        const SizedBox(width: 8.0),
+                        Expanded(
+                          child: Text(
+                            'Seguridad (SecureStorage)',
+                            style: const TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
@@ -161,11 +185,13 @@ class _StorageEvidenceScreenState extends State<StorageEvidenceScreen> {
                       children: [
                         Icon(Icons.info, color: Colors.orange),
                         SizedBox(width: 8.0),
-                        Text(
-                          'Información de la Sesión',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                        Expanded(
+                          child: Text(
+                            'Información de la Sesión',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
