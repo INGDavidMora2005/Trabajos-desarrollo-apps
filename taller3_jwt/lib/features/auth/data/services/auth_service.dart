@@ -65,7 +65,7 @@ class AuthService {
           'name': name,
           'email': email,
           'password': password,
-          // Sin password_confirmation — la API no lo pide
+          'password_confirmation': password,
         }),
       );
 
@@ -74,9 +74,19 @@ class AuthService {
         return;
       } else if (response.statusCode == 422) {
         final data = jsonDecode(response.body);
+        // Intentar obtener mensaje específico de validación
+        if (data['errors'] != null && data['errors'] is Map) {
+          final errors = data['errors'] as Map<String, dynamic>;
+          final messages = errors.values.expand((e) => e is List ? e : [e]).join(', ');
+          throw Exception(messages.isNotEmpty ? messages : 'Datos inválidos');
+        }
         throw Exception(data['message'] ?? 'El correo ya está registrado o datos inválidos');
+      } else if (response.statusCode == 400) {
+        throw Exception('Solicitud incorrecta. Verifica los datos');
+      } else if (response.statusCode >= 500) {
+        throw Exception('Error del servidor. Intenta más tarde');
       } else {
-        throw Exception('Error al registrar usuario. Intenta más tarde');
+        throw Exception('Error al registrar usuario. Código: ${response.statusCode}');
       }
     } catch (e) {
       if (e is Exception) rethrow;
