@@ -63,17 +63,22 @@ class NuevaUniversidadScreenState extends State<NuevaUniversidadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nueva Universidad'),
+        title: const Text('Nueva Universidad'),
+        backgroundColor: const Color(0xFF1A365D),
+        foregroundColor: Colors.white,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(24.0),
         child: Form(
           key: _formKey,
           child: ListView(
             children: [
               TextFormField(
                 controller: _nitController,
-                decoration: InputDecoration(labelText: 'NIT'),
+                decoration: const InputDecoration(
+                  labelText: 'NIT',
+                  prefixIcon: Icon(Icons.badge),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'El NIT es requerido';
@@ -81,9 +86,13 @@ class NuevaUniversidadScreenState extends State<NuevaUniversidadScreen> {
                   return null;
                 },
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _nombreController,
-                decoration: InputDecoration(labelText: 'Nombre'),
+                decoration: const InputDecoration(
+                  labelText: 'Nombre',
+                  prefixIcon: Icon(Icons.business),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'El nombre es requerido';
@@ -91,9 +100,13 @@ class NuevaUniversidadScreenState extends State<NuevaUniversidadScreen> {
                   return null;
                 },
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _direccionController,
-                decoration: InputDecoration(labelText: 'Dirección'),
+                decoration: const InputDecoration(
+                  labelText: 'Dirección',
+                  prefixIcon: Icon(Icons.location_on),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'La dirección es requerida';
@@ -101,9 +114,13 @@ class NuevaUniversidadScreenState extends State<NuevaUniversidadScreen> {
                   return null;
                 },
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _telefonoController,
-                decoration: InputDecoration(labelText: 'Teléfono'),
+                decoration: const InputDecoration(
+                  labelText: 'Teléfono',
+                  prefixIcon: Icon(Icons.phone),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'El teléfono es requerido';
@@ -111,15 +128,20 @@ class NuevaUniversidadScreenState extends State<NuevaUniversidadScreen> {
                   return null;
                 },
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _paginaWebController,
-                decoration: InputDecoration(labelText: 'Página Web'),
+                decoration: const InputDecoration(
+                  labelText: 'Página Web',
+                  prefixIcon: Icon(Icons.language),
+                ),
                 validator: _validateUrl,
               ),
-              SizedBox(height: 20),
-              ElevatedButton(
+              const SizedBox(height: 32),
+              ElevatedButton.icon(
                 onPressed: _saveUniversidad,
-                child: Text('Guardar Universidad'),
+                icon: const Icon(Icons.save),
+                label: const Text('Guardar Universidad'),
               ),
             ],
           ),
